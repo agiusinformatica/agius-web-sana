@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico">
-    <title>Sana MT</title>
+    <title>Divulga Fretes - Sana</title>
     <style>
-        /* Remove margens e barras de rolagem da página "mãe" */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; /* Trava a rolagem externa */
-        }
-        /* O Iframe ocupa exatamente 100% da tela visível */
-        iframe {
-            display: block;
-            width: 100%;
-            height: 100vh; /* 100% da altura da viewport */
-            border: none;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
-    <iframe src="https://script.google.com/macros/s/AKfycbwJ0tvFhr-ao44ry8zJKRKZCxnjc5eZjGiQoLSTkghC_CZ05UjE25mVoBi9CYNXIRvZ/exec" title="App"></iframe>
+    <div id="app-container" style="width:100%; height:100vh;"></div>
+    <script>
+        var agius = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J3SjB0dkZoci1hbzQ0cnk4ekpLUktaQ3huamM1ZVpqR2lRb0xTVGtnaENfQ1owNVVqRTI1bVZvQmk5Q1lOWElSdlovZXhlYw==";
+        (function() {
+            var urlReal = atob(agius);
+            var iframe = document.createElement('iframe');
+            iframe.src = urlReal;
+            iframe.title = "App";
+            iframe.style.display = "block";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            document.getElementById('app-container').appendChild(iframe);
+        })();
+    </script>
 </body>
 </html>
