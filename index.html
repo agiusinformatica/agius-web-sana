@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sana Transportadora</title>
     <style>
-        /* Reset básico e tipografia */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: #3d4145;
@@ -22,14 +20,11 @@
             min-height: 100vh;
             padding: 40px 20px;
         }
-
         .container {
             width: 100%;
             max-width: 480px;
             text-align: center;
         }
-
-        /* --- LOGO RETANGULAR --- */
         .profile-logo {
             width: auto;           
             max-width: 240px;      
@@ -39,14 +34,11 @@
             object-fit: contain;   
             margin-bottom: 24px;
         }
-
         .link-list {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
-
-        /* --- ESTILO GERAL DOS BOTÕES DE ESTADO (MS/MT) --- */
         .state-card {
             background-color: #fff;
             display: flex;         
@@ -62,13 +54,11 @@
             border: 1px solid transparent; 
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
-
         .state-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.15);
             border-color: #da3738; /* Vermelho */
         }
-
         .state-card .map-icon {
             height: 100%;       
             width: auto;        
@@ -76,7 +66,6 @@
             object-fit: contain;
             transition: transform 0.3s ease;
         }
-
         .state-card .state-label {
             font-size: 2.5rem; 
             font-weight: 800;  
@@ -84,69 +73,47 @@
             text-transform: uppercase;
             transition: transform 0.3s ease;
         }
-
         .state-card:hover .state-label {
             transform: scale(1.05); 
             color: #000;
         }
-
-        /* --- ESTILO NOVO: Link Divulga (Apenas Imagem) --- */
         .divulga-link {
             display: flex;
             justify-content: center;
             align-items: center;
             text-decoration: none;
             padding: 10px;
-            /* Não tem background nem borda */
             transition: transform 0.3s ease;
         }
-
         .divulga-link img {
             display: block;
-            width: 80%; /* Mantém os 50% solicitados */
+            width: 80%;
             height: auto;
             object-fit: contain;
-            /* Transição suave para o filtro de sombra */
             transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.3s ease;
         }
-
-        /* Hover do Divulga: Zoom + Sombra Branca */
         .divulga-link:hover img {
-            transform: scale(1.15); /* Zoom um pouco maior */
-            /* Drop shadow branco suave */
+            transform: scale(1.15);
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); 
         }
-
     </style>
 </head>
 <body>
-
     <div class="container">
-        <!-- Logo Retangular -->
         <img src="/assets/logo-sana-branca.png" alt="Logo" class="profile-logo">
-
-        <!-- Lista de Links -->
         <div class="link-list">
-            
-            <!-- Link MS (Com estilo de Cartão) -->
             <a href="/ms" class="state-card" aria-label="Mato Grosso do Sul">
                 <img src="/assets/mapa-ms.png" alt="Mapa MS" class="map-icon">
                 <span class="state-label">MS</span>
             </a>
-
-            <!-- Link MT (Com estilo de Cartão) -->
             <a href="/mt" class="state-card" aria-label="Mato Grosso">
                 <img src="/assets/mapa-mt.png" alt="Mapa MT" class="map-icon">
                 <span class="state-label">MT</span>
             </a>
-
-            <!-- Link Divulga (Novo estilo: Apenas Imagem) -->
             <a href="/divulgafretes" class="divulga-link" aria-label="Divulga Fretes">
                 <img src="/assets/divulga.webp" alt="Divulga Fretes">
             </a>
-
         </div>
     </div>
-
 </body>
 </html>
