@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Transportadora Sana">
+    <meta property="og:image" content="https://sana.agius.log.br/assets/logo-192.png">
+    <meta property="og:url" content="https://sana.agius.log.br">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#3d4145">
     <title>Transportadora Sana</title>
     <style>
         * {
@@ -18,7 +23,7 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            padding: 40px 20px;
+            padding: 40px 20px 70px 20px;
         }
         .container {
             width: 100%;
@@ -32,13 +37,24 @@
             max-height: 120px;     
             border-radius: 0;      
             object-fit: contain;   
+            margin-bottom: 10px;
+        }
+        
+        .erp-title {
+            color: #ffffff;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             margin-bottom: 24px;
         }
+
         .link-list {
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
+        
         .state-card {
             background-color: #fff;
             display: flex;         
@@ -53,11 +69,12 @@
             position: relative; 
             border: 1px solid transparent; 
             transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
         }
         .state-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 15px rgba(0,0,0,0.15);
-            border-color: #da3738; /* Vermelho */
+            border-color: #da3738;
         }
         .state-card .map-icon {
             height: 100%;       
@@ -77,6 +94,14 @@
             transform: scale(1.05); 
             color: #000;
         }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.4);
+            margin: 20px 0;
+        }
+
         .divulga-link {
             display: flex;
             justify-content: center;
@@ -96,41 +121,190 @@
             transform: scale(1.15);
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3)); 
         }
+
+        .motorista-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px; 
+        }
+
+        .btn-copy {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-copy:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+        }
+        
+        .btn-copy:active {
+            transform: scale(0.95);
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* --- ESTILOS DO TOAST (FLAG VERMELHA) --- */
+        .toast-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px); /* Começa escondido pra cima */
+            background-color: #e53935; /* Vermelho alerta */
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            font-weight: 600;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            pointer-events: none; /* Não interfere no clique enquanto invisível */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast-notification.show {
+            transform: translateX(-50%) translateY(0); /* Desce para a posição */
+            opacity: 1;
+        }
+
+        .app-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: #3d4145;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
+
+    <!-- ELEMENTO DA NOTIFICAÇÃO (TOAST) -->
+    <div id="toast-notification" class="toast-notification">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <span id="toast-message">Mensagem aqui</span>
+    </div>
+
     <div class="container">
+        <!-- Logo -->
         <img src="https://sana.agius.log.br/assets/logo-sana-branca.png" alt="Logo" class="profile-logo">
+        
+        <!-- Título ERP -->
+        <h2 class="erp-title">ERP</h2>
+
         <div class="link-list">
-            <a href="#" class="state-card" aria-label="Mato Grosso do Sul">
+            
+            <!-- Botão MS -->
+            <a href="javascript:void(0)" class="state-card" onclick="showToast('Módulo MS em breve!')" aria-label="Mato Grosso do Sul">
                 <img src="https://sana.agius.log.br/assets/mapa-ms.png" alt="Mapa MS" class="map-icon">
                 <span class="state-label">MS</span>
             </a>
-            <a href="#" class="state-card" aria-label="Mato Grosso">
+
+            <!-- Botão MT -->
+            <a href="javascript:void(0)" class="state-card" onclick="showToast('Módulo MT em breve!')" aria-label="Mato Grosso">
                 <img src="https://sana.agius.log.br/assets/mapa-mt.png" alt="Mapa MT" class="map-icon">
                 <span class="state-label">MT</span>
             </a>
+
+            <!-- Divisória -->
+            <div class="divider"></div>
+
+            <!-- Link Divulga Fretes -->
             <a href="https://sana.agius.log.br/divulgafretes" class="divulga-link" aria-label="Divulga Fretes">
                 <img src="https://sana.agius.log.br/assets/divulga.png" alt="Divulga Fretes">
             </a>
-            <a href="https://sana.agius.log.br/divulgafretes/motorista" class="divulga-link" aria-label="Divulga Fretes">
-                <img src="https://sana.agius.log.br/assets/divulga-motorista.png" alt="Divulga Fretes">
-            </a>
+
+            <!-- BLOCO MOTORISTA COM BOTÃO COPIAR -->
+            <div class="motorista-wrapper">
+                <a href="https://sana.agius.log.br/divulgafretes/motorista" class="divulga-link" aria-label="Divulga Fretes Motorista">
+                    <img src="https://sana.agius.log.br/assets/divulga-motorista.png" alt="Divulga Fretes">
+                </a>
+                
+                <button class="btn-copy" onclick="copiarLinkMotorista(this)">
+                    <span>Copiar Link</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+
         </div>
     </div>
-    <footer style="
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    ">
-    © 2026 Transportadora Sana. Todos os direitos reservados.
+
+    <footer class="app-footer">
+        © 2026 Transportadora Sana. Todos os direitos reservados.
     </footer>
+
+    <script>
+        let toastTimeout;
+
+        // Função da Flag Vermelha (Toast)
+        function showToast(message) {
+            const toast = document.getElementById('toast-notification');
+            const toastMsg = document.getElementById('toast-message');
+            
+            toastMsg.innerText = message;
+            toast.classList.add('show');
+            
+            // Limpa timer anterior se o usuário clicar rápido várias vezes
+            if (toastTimeout) clearTimeout(toastTimeout);
+
+            // Some depois de 3 segundos
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Função de Copiar Link
+        function copiarLinkMotorista(botao) {
+            const urlParaCopiar = "https://sana.agius.log.br/divulgafretes/motorista";
+            
+            navigator.clipboard.writeText(urlParaCopiar).then(() => {
+                feedbackVisual(botao);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+                // Fallback para toast em caso de erro no copy
+                showToast("Erro ao copiar link automaticamente.");
+            });
+        }
+
+        function feedbackVisual(botao) {
+            const textoOriginal = botao.innerHTML;
+            
+            botao.style.borderColor = "#4caf50";
+            botao.style.color = "#4caf50";
+            botao.innerHTML = 'Copiado! <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+            
+            setTimeout(() => {
+                botao.style.borderColor = "rgba(255, 255, 255, 0.5)";
+                botao.style.color = "#fff";
+                botao.innerHTML = textoOriginal;
+            }, 2000);
+        }
+    </script>
+
 </body>
 </html>
