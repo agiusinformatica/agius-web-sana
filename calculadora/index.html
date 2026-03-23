@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Calculadora">
+    <meta property="og:description" content="Piso Mínimo Tabela ANTT">
+    <meta property="og:image" content="https://sana.agius.log.br/assets/logo-192.png">
+    <meta property="og:url" content="https://sana.agius.log.br/calculadora">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#3d4145">
+    <link rel="icon" href="/favicon.ico">
+    <title>Calculadora Piso Mínimo</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container" style="width:100%; height:100vh;"></div>
+    <script>
+        var agius = "aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J5M3prRFMtcTVHbVp3YTBYc09saFRUWjQ4c1E0akh5OEk4b24yVS1HYldxLVlxS3FFbzBaTTRLZ25Md3pBMGNYV0xsd y9leGVj";
+        (function() {
+            var urlReal = atob(agius);
+            var iframe = document.createElement('iframe');
+            iframe.src = urlReal;
+            iframe.title = "App";
+            iframe.style.display = "block";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            document.getElementById('app-container').appendChild(iframe);
+        })();
+    </script>
+</body>
+</html>
